@@ -1,0 +1,16 @@
+services:
+
+  vidoomy_graphql_mutation_validator.validator:
+    class: Vidoomy\GraphQLMutationValidatorBundle\Validator\MutationValidator
+    public: true
+    arguments:
+      - "@validator"
+
+  Vidoomy\GraphQLMutationValidatorBundle\Validator\MutationValidator:
+    alias: vidoomy_graphql_mutation_validator.validator
+
+  vidoomy_graphql_mutation_validator.formatter:
+    class: Vidoomy\GraphQLMutationValidatorBundle\Formatter\Formatter
+    public: false
+    tags:
+      - { name: kernel.event_listener, event: graphql.error_formatting, method: onErrorFormatting }
